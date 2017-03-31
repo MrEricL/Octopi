@@ -1,6 +1,5 @@
-//note no DLNode from mr brown
-
-public class DLDeque<T> implments Deque{
+//no DLNode, only DLLNode
+public class DLDeque<T> implements Deque{
 
     DLNode<T> first;
     DLNode<T> last;
@@ -83,7 +82,9 @@ public class DLDeque<T> implments Deque{
 	return last.getValue();
     }
 
-    public int size() return size;
+    public int size(){
+	return size;
+    }
 	
 
 
