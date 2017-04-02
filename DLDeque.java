@@ -1,91 +1,112 @@
-//no DLNode, only DLLNode
-public class DLDeque<T> implements Deque{
+import java.util.NoSuchElementException;
+public class DLDeque<T> implements Deque<T>{
 
-    DLNode<T> first;
-    DLNode<T> last;
-    int size;
+    DLNode<T> _first;
+    DLNode<T> _last;
+    int _size;
 
     public DLDeque(){
 
-	first=null;
-	last=null;
-	size=0;
+	_first=null;
+	_last=null;
+	_size=0;
     }
-    
+
     public void addFirst(T x){
-	if (size()==0){
-	    last = first = new DLNode<T> (null, x, null);
-	}
-	else {
-	    first  = new DLNode<T> (null, x, first);
-	}
-	size++;
+        //when a queue has no element
+    	if (_size==0){
+    	    _last = _first = new DLNode<T> (null, x, null);
+    	}
+    	else {
+    	    _first  = new DLNode<T> (null, x, _first);
+            //also maintain double sided linkage:
+            _first.getNext().setLast(_first);
+    	}
+    	_size++;
     }
 
     public void addLast(T x){
-	if (size()==0){
-	    last = first = new DLNode<T> (null, x, null);
-	}
-	else {
-	    last  = new DLNode<T> (last, x, null);
-	}
-	size++;	
+    	if (size()==0){
+    	    _first = _last = new DLNode<T> (null, x, null);
+    	}
+    	else {
+    	    _last = new DLNode<T> (_last, x, null);
+            //also maintain double sided linkage:
+            _last.getLast().setNext(_last);
+    	}
+    	_size++;
     }
-
+    //pop _first element
     public T removeFirst(){
-	T ret = first;
-	
-	if (size()==0) return null;
-	else if (size()==1){
-
-	    first=null;
-	    last=null;
-	}
-	else if (size()==2){
-	    first=last;
-	}
-	else{
-	    first = new DLNode<T> (null, first.getNext(), first.getNext().getNext());
-	    
-	}
-
-	size--;
-	return ret;
+    	if (_size==0) throw new NoSuchElementException(); //throw error if necessary
+        T ret = _first.getValue();
+        //else, just set front to it's next element
+    	_first = _first.getNext();
+        //get rid of backwards linkage:
+        _first.setLast(null);
+        //if there's one element, make sure to set both _first and _last to point to null
+        if (_size==1){
+            _last=_first;
+        }
+    	_size--;
+    	return ret;
     }
-
+    //pop _last element
     public T removeLast(){
-	T ret = last;
-	
-	if (size()==0) return null;
-	else if (size()==1){
-
-	    first=null;
-	    end=null;
-	}
-	else if (size()==2){
-	    last=first;
-	}	
-	else{
-	    
-	    last = new DLNode<T> (last.getBack().getBack(), last.getBack(), null);	    
-	}
-
-	size--;
-	return ret;	
+        if (_size==0) throw new NoSuchElementException(); //throw error if necessary
+        T ret = _last.getValue();
+        //else, just set front to it's next element
+        _last = _last.getNext();
+        //get rid of backwards linkage:
+        _last.setNext(null);
+        //if there's one element, make sure to set both _first and _last to point to null
+        if (_size==1){
+            _first=_last;
+        }
+        _size--;
+        return ret;
     }
 
     public T getFirst(){
-	return first.getValue();
+        if (_size==0) throw new NoSuchElementException(); //throw error if necessary
+        return _first.getValue();
     }
 
     public T getLast(){
-	return last.getValue();
+        if (_size==0) throw new NoSuchElementException(); //throw error if necessary
+        return _last.getValue();
     }
 
     public int size(){
-	return size;
+        return _size;
     }
-	
+    public String toString() {
+        //print from front to end with delim:
+        String ret = new String();
+        String delim = " ";
+        DLNode<T> tmp = _first;
+        while (tmp != null) {
+            ret+=tmp.getValue().toString()+delim;
+            tmp=tmp.getNext();
+        }
+        return ret;
+    }
+
+
+    //main method for testing:
+
+    public static void main(String[] a) {
+        //create a new Deque
+        Deque<String> q = new DLDeque<String>();
+        System.out.println(q);//blank
+        q.addFirst("A");
+        System.out.println(q);
+        q.addLast("L");
+        System.out.println(q);
+        q.addFirst("M");
+
+    }
+
 
 
 

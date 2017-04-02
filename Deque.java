@@ -1,16 +1,16 @@
-public interface Deque<Q>{
+public interface Deque<T>{
 
-    public void addFirst(Q x);
+    public void addFirst(T x);
 
-    public void addLast(Q x);
+    public void addLast(T x);
 
-    public Q removeFirst();
+    public T removeFirst();
 
-    public Q removeLast();
+    public T removeLast();
 
-    public Q getFirst();
+    public T getFirst();
 
-    public Q getLast();
+    public T getLast();
 
     public int size();
 
