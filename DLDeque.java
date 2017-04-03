@@ -38,31 +38,43 @@ public class DLDeque<T> implements Deque<T>, Queue<T>{
     }
     //pop _first element
     public T removeFirst(){
-    	if (_size==0) throw new NoSuchElementException(); //throw error if necessary
-        T ret = _first.getValue();
+
+        if (_size==0) throw new NoSuchElementException(); //throw error if necessary
+        T ret = _last.getValue();
+	
+        if (_size==1){	    
+            _first=_last;	    
+        }
+	
+
+	else {
         //else, just set front to it's next element
-    	_first = _first.getNext();
+        _first = _first.getNext();
         //get rid of backwards linkage:
         _first.setLast(null);
         //if there's one element, make sure to set both _first and _last to point to null
-        if (_size==1){
-            _last=_first;
-        }
-    	_size--;
-    	return ret;
+	}
+        _size--;
+        return ret;
     }
     //pop _last element
     public T removeLast(){
+
         if (_size==0) throw new NoSuchElementException(); //throw error if necessary
         T ret = _last.getValue();
+	
+        if (_size==1){	    
+            _first=_last;	    
+        }
+	
+
+	else {
         //else, just set front to it's next element
-        _last = _last.getNext();
+        _last = _last.getLast();
         //get rid of backwards linkage:
         _last.setNext(null);
         //if there's one element, make sure to set both _first and _last to point to null
-        if (_size==1){
-            _first=_last;
-        }
+	}
         _size--;
         return ret;
     }
@@ -105,12 +117,20 @@ public class DLDeque<T> implements Deque<T>, Queue<T>{
         //create a new Deque
         Deque<String> q = new DLDeque<String>();
         System.out.println(q);//blank
-        q.addFirst("A");
-        System.out.println(q);
         q.addLast("L");
         System.out.println(q);
-        q.addFirst("M");
-
+        q.addFirst("P");
+        q.addFirst("P");
+        System.out.println(q);
+        q.addLast("E");
+        System.out.println(q);
+        q.addFirst("A");
+	System.out.println(q); //apple
+	//	System.out.println(q.getLast());	
+	System.out.println(q.removeLast());
+	System.out.println(q);
+	System.out.println(q.removeFirst());
+	System.out.println(q);	
     }
 
 
