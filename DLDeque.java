@@ -1,5 +1,5 @@
 import java.util.NoSuchElementException;
-public class DLDeque<T> implements Deque<T>{
+public class DLDeque<T> implements Deque<T>, Queue<T>{
 
     DLNode<T> _first;
     DLNode<T> _last;
@@ -91,6 +91,12 @@ public class DLDeque<T> implements Deque<T>{
         }
         return ret;
     }
+
+    //QUEUE COMPATIBILITY METHODS:
+    public T dequeue() {return removeFirst();}
+    public void enqueue(T ob) {addLast(ob);}
+    public boolean isEmpty() {return _size==0;}
+    public T peekFront() {return getFirst();}
 
 
     //main method for testing:
