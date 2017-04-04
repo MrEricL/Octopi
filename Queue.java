@@ -5,7 +5,7 @@
  ******************************************************/
 
 
-public interface Queue<Quasar> {
+public interface Queue<Quasar> extends Iterable<Quasar> {
 
     //~~~~~~~~~~~~~~~~~~begin AP subset~~~~~~~~~~~~~~~~~~
     //means of removing an element from collection:
@@ -24,4 +24,4 @@ public interface Queue<Quasar> {
     //~~~~~~~~~~~~~~~~~~~end AP subset~~~~~~~~~~~~~~~~~~~
 
 
-}//end interface Queue                                                                                           
+}//end interface Queue

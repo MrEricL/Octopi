@@ -1,4 +1,4 @@
-public interface Deque<T>{
+public interface Deque<T> extends Queue<T>{
 
     public void addFirst(T x);
 

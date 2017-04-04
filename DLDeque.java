@@ -1,6 +1,6 @@
 import java.util.NoSuchElementException;
 import java.util.Iterator;
-public class DLDeque<T> implements Deque<T>, Queue<T>, Iterable<T>{
+public class DLDeque<T> implements Deque<T>{
 
     DLNode<T> _first;
     DLNode<T> _last;
@@ -113,7 +113,7 @@ public class DLDeque<T> implements Deque<T>, Queue<T>, Iterable<T>{
     //ITERATOR:
     public Iterator<T> iterator()
     {
-    return new MyIterator();
+        return new MyIterator();
     }
 
 
