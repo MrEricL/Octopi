@@ -28,11 +28,15 @@ Returns the size of the elements.
 ### Methods inherited from Queue:
 `public Quasar dequeue()`
 Pops the first element
+
 `public void enqueue( Quasar x )`
 Adds an element at the end
+
 `public boolean isEmpty()`
 Returns if the size of the Q is 0
+
 `public Quasar peekFront()`
 Returns the first element
+
 `public Iterator<T> iterator()`
 Returns an iterator for the Q in normal FIFO mode
