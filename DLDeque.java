@@ -201,23 +201,32 @@ public class DLDeque<T> implements Deque<T>{
         //if removing first node...
             /* YOUR IMPLEMENTATION HERE */
         if (_dummy.equals(_first)){
-            //set the node after the head to no longer point back to the head
-            _first.getNext().setLast(null);
-            _first = _first.getNext();
+            if (_first.getNext()==null) {
+                _first = null;
+            }
+            else {
+                //set the node after the head to no longer point back to the head
+                _first.getNext().setLast(null);
+                _first = _first.getNext();
+            }
         }
         //if removing last node...
             /* YOUR IMPLEMENTATION HERE */
         else if (_dummy.equals(_last)){
-            //set the node before the tail to no longer refer back to the tail
-            _last.getLast().setNext(null);
-            _last = _last.getLast();
+            if (_last.getLast()==null) {
+                _last = null;
+            }
+            else {
+                //set the node before the tail to no longer refer back to the tail
+                _last.getLast().setNext(null);
+                _last = _last.getLast();
+            }
         }
         //if removing an interior node...
         else {
             //get the items before and after the node to refer to eachother rather than to the no longer existent node
             _dummy.getNext().setLast(_dummy.getLast());
             _dummy.getLast().setNext(_dummy.getNext());
-            _dummy = _dummy.getNext();
         }
             /* YOUR IMPLEMENTATION HERE */
 
