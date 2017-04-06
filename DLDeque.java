@@ -13,6 +13,9 @@ public class DLDeque<T> implements Deque<T>{
 	_size=0;
     }
 
+/*
+POSTCOND: The element is added to the head of DLQueue with _first pointing to it
+*/
     public void addFirst(T x){
         //when a queue has no element
     	if (_size==0){
@@ -25,7 +28,9 @@ public class DLDeque<T> implements Deque<T>{
     	}
     	_size++;
     }
-
+/*
+POSTCOND: The element is added to the tail of DLQueue with _last pointing to it
+*/
     public void addLast(T x){
     	if (size()==0){
     	    _first = _last = new DLNode<T> (null, x, null);
@@ -37,7 +42,10 @@ public class DLDeque<T> implements Deque<T>{
     	}
     	_size++;
     }
-    //pop _first element
+/*
+PRECOND: The DLQueue is not empty
+POSTCOND: The element is removed to the head of DLQueue with _head pointing to the next element
+*/
     public T removeFirst(){
 
         if (_size==0) throw new NoSuchElementException(); //throw error if necessary
@@ -58,7 +66,10 @@ public class DLDeque<T> implements Deque<T>{
         _size--;
         return ret;
     }
-    //pop _last element
+/*
+PRECOND: The DLQueue is not empty
+POSTCOND: The element is removed to the tail of DLQueue with _last pointing to the previous element
+*/
     public T removeLast(){
 
         if (_size==0) throw new NoSuchElementException(); //throw error if necessary
@@ -79,17 +90,25 @@ public class DLDeque<T> implements Deque<T>{
         _size--;
         return ret;
     }
-
+/*
+PRECOND: The DLQueue is not empty
+POSTCOND: The element that _head is pointing to is returned
+*/
     public T getFirst(){
         if (_size==0) throw new NoSuchElementException(); //throw error if necessary
         return _first.getValue();
     }
-
+/*
+PRECOND: The DLQueue is not empty
+POSTCOND: The element that _last is pointing to is returned
+*/
     public T getLast(){
         if (_size==0) throw new NoSuchElementException(); //throw error if necessary
         return _last.getValue();
     }
-
+/*
+POSTCOND: The size of DLQueue is returned
+*/
     public int size(){
         return _size;
     }
